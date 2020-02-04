@@ -1,0 +1,69 @@
+@import "../store/styles/variables.scss";
+
+.header {
+  height: 72px;
+  width: 100%;
+  background-color: $color-blue;
+  padding: 10px 10px 13px 9%;
+
+  &__logo {
+    font-size: 40px;
+    color: white;
+  }
+}
+
+.body {
+  padding: 16px 9% 24px;
+
+  @media(max-width: 845px) {
+    padding: 16px 5% 24px;
+  }
+  @media(max-width: 400px) {
+    padding: 16px 1% 24px;
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+
+  &__link {
+    font-size: 16px;
+    color: #ccc;
+
+    &--active {
+      color: $color-blue;
+    }
+  }
+
+  &__arrow {
+    background-image: url('../images/arrow_gray_small.svg');
+    height: 8px;
+    width: 4px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: auto 8px;
+  }
+}
+
+.footer {
+  background-color: $color-dark-blue;
+  justify-content: space-between;
+  align-items: center;
+  height: 57px;
+  display: flex;
+  padding: 14px 9% 14px 9%;
+  color: white;
+  font-size: 16px;
+
+  @media(max-width: 640px) {
+    flex-direction: column;
+    font-size: 12px;
+    justify-content: center;
+  }
+
+
+  &__logo {
+    font-size: 24px;
+  }
+}

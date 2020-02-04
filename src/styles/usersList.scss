@@ -1,0 +1,99 @@
+@import "../store/styles/variables.scss";
+
+.page-name {
+  margin: 24px auto 16px 0;
+
+  @media(max-width: 640px) {
+    font-size: 28px;
+  }
+}
+
+.table {
+  width: 100%;
+  // border-radius: 8px;
+  // border: 1px solid white;
+
+  &__header {
+    background-color: $color-blue;
+    & :nth-child(6) {
+      padding: 0 5px;
+      text-align: center;
+    }
+    & :nth-child(7) {
+      padding: 0 5px;
+      text-align: center;
+    }
+    & :nth-child(8) {
+      padding: 0 5px;
+      text-align: center;
+    }
+
+    & :nth-child(4) {
+      min-width: 40px;
+    }
+
+    &__cell {
+      padding: 14px 20px;
+      font-size: 16px;
+      color: white;
+      font-weight: 300;
+      text-align: left;
+      white-space: nowrap;
+
+      @media(max-width: 1275px) {
+        white-space: initial;
+        font-size: 12px;
+        padding: 14px 5px;
+      }
+
+      @media(max-width: 640px) {
+        font-size: 9px;
+      }
+    }
+  }
+
+  & tr:nth-child(odd) {
+    background-color: #FBFBFB;
+    height: 32px;
+  }
+
+  & tr:nth-child(even) {
+    background-color: #F1F1F1;
+    height: 32px;
+  }
+
+  &__cell {
+    color:  #1A1A1A;
+
+    @media(max-width: 1275px) {
+      font-size: 12px;
+    }
+
+    @media(max-width: 640px) {
+      font-size: 9px;
+    }
+
+    @media(max-width: 500px) {
+      word-break: break-all;
+    }
+
+    &--centered {
+      text-align: center;
+    }
+
+    &--left {
+      padding: 6px 24px;
+
+      @media(max-width: 1275px) {
+        padding: 0 0 0 5px;
+        text-align: left;
+      }
+
+      @media(max-width: 400px) {
+        padding: 0 0 0 1px;
+      }
+    }
+  }
+}
+
+

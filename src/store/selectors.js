@@ -1,5 +1,7 @@
 import { createSelector } from 'reselect';
 
+import { usersPerPage } from './../App';
+
 const rootSelector = state => state;
 
 export const selectUsers = createSelector(
@@ -22,11 +24,11 @@ export const seleсtIsLoading = createSelector(
 export const seleсtPaginationButtons = createSelector(
   rootSelector,
   ({ countAllUsers }) => {
-    let count = Math.ceil(countAllUsers / 50)
+    let count = Math.ceil(countAllUsers / usersPerPage)
 
     let arr = [...Array(count+1).keys()]
-    
     arr.shift()
+
     let result = []
       while(arr.length>0) {
         result.push(arr.splice(0, 5))
@@ -35,3 +37,10 @@ export const seleсtPaginationButtons = createSelector(
     return result
   }
 );
+
+export const userDetailes = createSelector(
+  rootSelector,
+  ({ userStatistics }) => {
+   return !userStatistics ? [] : userStatistics;
+  }
+)

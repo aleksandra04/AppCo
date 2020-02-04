@@ -1,0 +1,68 @@
+@import "../store/styles/variables.scss";
+
+.footer-main {
+  // height: 130px;
+  background: url('../images/footer_background.svg') 100% 100% no-repeat;
+  background-size: cover;
+  padding: 26px 9% 38px;
+
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    color: white;
+    font-size: 16px;
+    line-height: 32px;
+
+    @media(max-width: 660px) {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+      &_logo {
+        font-size: 32px;
+      }
+  }
+}
+
+.footer-form {
+  max-width: 579px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto 32px;
+  border: 1px solid #F1F1F1;
+  border-radius: 10px;
+  padding: 4px;
+  background-color: white;
+
+  &__input {
+    margin-left: 15px;
+    width: 60%;
+    height: 100%;
+
+    &::placeholder {
+      font-size: 16px;
+      color: #B9B9B9;
+
+      @media (max-width: 375px) {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &__button {
+    width: 176px;
+    height: 56px;
+    background-color: $color-blue;
+    color: white;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 200;
+
+    @media (max-width: 375px) {
+      width: 100px;
+    }
+  }
+}

@@ -2,8 +2,9 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom'
 import './App.css';
 import UsersPage from './components/usersPage'
-import Main from './components/main'
+import Main from './components/Main/main'
 
+export const usersPerPage = 10
 
 const App = () => {
 
@@ -11,7 +12,7 @@ const App = () => {
     <>
     <Switch>
       <Route path='/' exact component={Main}/>
-      <Route path='/users' component={UsersPage}/>
+      <Route path='/users/:id?' component={UsersPage}/>
     </Switch>
     </>
   );

@@ -6,16 +6,16 @@ const users_statistic = require('./public/users_statistic')
 
 const usersWithStatistic = users.map(user => {
   const stat = users_statistic
-  .filter(userInfo => userInfo.user_id === user.id)
+    .filter(userInfo => userInfo.user_id === user.id)
 
   return {
-  ...user,
-  // staistic: stat,
-  totalClicks: stat.map((a) => a.clicks)
-    .reduce((a,b) => a + b),
-  totalPageViews: stat.map((a) => a.page_views)
-    .reduce((a,b) => a + b),
-}
+    ...user,
+    // staistic: stat,
+    totalClicks: stat.map((a) => a.clicks)
+      .reduce((a, b) => a + b),
+    totalPageViews: stat.map((a) => a.page_views)
+      .reduce((a, b) => a + b),
+  }
 })
 
 const usersWithFilter = (usersPerPage, currentPage) => {
@@ -25,15 +25,35 @@ const usersWithFilter = (usersPerPage, currentPage) => {
   return usersWithStatistic.slice(start, end)
 }
 
-app.get('/api/v1/users/:id?', (request, response) => {
-  if(request.params.id){
-    console.log("user_id", request.params.id)
-  }
-  response.set('Access-Control-Allow-Origin', 'http://localhost:3000');
-  response.json({
-    users: usersWithFilter(request.query.per_page, request.query.page),
-    countAllUsers: users.length
+const userDetailes = (usedId, startDate, endDate) => {
+  let from = new Date(startDate)
+  let to = new Date(endDate)
+  let data = users_statistic.filter(item => item.user_id === +usedId).map(item => {
+    return {
+      ...item,
+      date: new Date(item.date)
+    }
+  }).filter(item => from <= item.date && item.date <= to)
+  return data.map(item => {
+    return {
+      ...item,
+      date: `${item.date.getFullYear()}-${item.date.getMonth() + 1}-${item.date.getDate()}`
+    }
   })
+}
+
+app.get('/api/v1/users/:id?', (request, response) => {
+  response.set('Access-Control-Allow-Origin', 'http://localhost:3000');
+  if (request.params.id) {
+    //check if user exists, maybe return error and catch it on the clients side
+    response.json(userDetailes(request.params.id, request.query.from, request.query.to))
+  }
+  else {
+    response.json({
+      users: usersWithFilter(request.query.per_page, request.query.page),
+      countAllUsers: users.length
+    })
+  }
 })
 
 app.use(express.static('build'))

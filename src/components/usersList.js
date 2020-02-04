@@ -2,9 +2,8 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { uploadUsers } from '../store/rootReducer';
 import { selectUsers, seleсtUsersError, seleсtIsLoading } from '../store/selectors'
-import { NavLink } from 'react-router-dom';
-import { useLocation } from 'react-router-dom'
-import '../styles/users.scss'
+import { useLocation, useHistory } from 'react-router-dom'
+import '../styles/usersList.scss'
 import Pagination from './pagination'
 import Loader from './loader'
 import { Error } from './error'
@@ -21,35 +20,48 @@ const UsersList = ({
 }) => {
 
   const location = useLocation();
+  const history = useHistory();
   const searchParams = new URLSearchParams(location.search);
   const selectedPage = searchParams.get('page');
+  const selectedUser = match.params.id
 
+  console.log('selectedUser', match);
+  
   useEffect(() => {
     loadUsers(selectedPage ? selectedPage : 1);
   }, [selectedPage]);
+
+const handleUserClick = (id) => {
+  history.push({
+    pathname: `/users/${id}`,
+    search: location.search,
+  });
+}
 
   return (
       <>
       {isLoading && !error && <Loader />}
       {error && ! isLoading && <Error message={error} />}
-      {!isLoading && !error && <>
+      {!isLoading && !error && 
+      <>
+        <h1 className='page-name'>Users statistics</h1>
         <table className='table'>
-        <thead>
+        <thead className='table__header'>
           {columnNames.map(column =>
-            <th>{column}</th>
+            <th className='table__header__cell'>{column}</th>
           )}
         </thead>
         <tbody>
           {usersData.map(user =>
-            <tr>
-              <td>{user.id}</td>
-              <td>{user.first_name}</td>
-              <td>{user.last_name}</td>
-              <td>{user.email}</td>
-              <td>{user.gender}</td>
-              <td>{user.ip_address}</td>
-              <td>{user.totalClicks}</td>
-              <td>{user.totalPageViews}</td>
+            <tr onClick={() => handleUserClick(user.id)}>
+              <td className='table__cell table__cell--centered'>{user.id}</td>
+              <td className='table__cell table__cell--left'>{user.first_name}</td>
+              <td className='table__cell table__cell--left'>{user.last_name}</td>
+              <td className='table__cell table__cell--left'>{user.email}</td>
+              <td className='table__cell table__cell--centered'>{user.gender}</td>
+              <td className='table__cell table__cell--centered'>{user.ip_address}</td>
+              <td className='table__cell table__cell--centered'>{user.totalClicks}</td>
+              <td className='table__cell table__cell--centered'>{user.totalPageViews}</td>
               
             </tr>
           )}

@@ -1,8 +1,11 @@
+import { usersPerPage } from './../App';
+
 const SAVE_USERS = 'SAVE_USERS';
 const SET_LOAD_USERS_ERROR = 'SET_LOAD_USERS_ERROR';
 const START_LOADING = 'START_LOADING';
 const STOP_LOADING = 'STOP_LOADING';
 const SET_COUNT = 'SET_COUNT';
+const SET_USER_STATISTICS = 'SET_USER_STATISTICS';
 
 
 const saveUsers = value => ({
@@ -28,14 +31,32 @@ const setCount = value => ({
   payload: value,
 });
 
+const saveUserStatitics = value => ({
+  type: SET_USER_STATISTICS,
+  payload: value,
+});
+
 export const uploadUsers = (selectedPage) => (dispatch) => {
   dispatch(startLoading())
 
-  fetch(`http://localhost:5000/api/v1/users?per_page=50&page=${selectedPage}`)
+  fetch(`http://localhost:5000/api/v1/users?per_page=${usersPerPage}&page=${selectedPage}`)
     .then(res => res.json())
     .then(({ users, countAllUsers }) => {
       dispatch(saveUsers(users))
       dispatch(setCount(countAllUsers))
+    })
+    .catch(error => dispatch(setUsersError(error.message)))
+    .finally(() => dispatch(stopLoading()));
+}
+
+export const uploadUserStatistic = (userId, startDate, endDate) => (dispatch) => {
+
+  dispatch(startLoading())
+
+  fetch(`http://localhost:5000/api/v1/users/${userId}?from=${startDate}&to=${endDate}`)
+    .then(res => res.json())
+    .then((data) => {
+      dispatch(saveUserStatitics(data))
     })
     .catch(error => dispatch(setUsersError(error.message)))
     .finally(() => dispatch(stopLoading()));
@@ -46,6 +67,7 @@ const initialState = {
   isLoading: false,
   error: null,
   countAllUsers: null,
+  userStatistics: null,
 };
 
 export const rootReducer = (state = initialState, action) => {
@@ -77,8 +99,12 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         countAllUsers: action.payload,
       };
+    case SET_USER_STATISTICS:
+      return {
+        ...state,
+        userStatistics: action.payload,
+      };
     default:
       return state;
   }
 };
-

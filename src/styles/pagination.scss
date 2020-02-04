@@ -1,17 +1,78 @@
+@import "../store/styles/variables.scss";
+
+.pagination {
+  display: flex;
+  width: 356px;
+  align-items: center;
+  margin: 24px auto;
+
+  @media (max-width: 400px) {
+    width: 300px;
+  }
+
+  & :first-child {
+    margin-right: 24px;
+  }
+
+  & :last-child {
+    margin-left: 16px;
+  }
+
+  &__button {
+    width: 48px;
+    height: 48px;
+    border: 2px solid #F1F1F1;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 16px;
+    margin-right: 8px;
+
+    &--active {
+      background-color: $color-blue;
+      color: white;
+      border: none;
+    }
+
+    &:hover {
+      cursor: pointer;
+      border: 2px solid $color-blue;
+    }
+  }
+}
+
 .arrow-gray {
   background-image: url('../images/arrow_gray.svg');
   background-repeat: no-repeat;
   background-size: contain;
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 32px;
+
+  &--translate {
+    background-image: url('../images/arrow_blue.svg');
+    transform: scale(-1, 1);
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
+
 .arrow-blue {
   background-image: url('../images/arrow_blue.svg');
   display: inline-block;
   background-repeat: no-repeat;
   background-size: contain;
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 32px;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &--translate {
+    background-image: url('../images/arrow_gray.svg');
+    transform: scale(-1, 1);
+  }
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom'
 import '../styles/pagination.scss'
+import cx from 'classnames';
 import { connect } from 'react-redux';
 import { seleсtPaginationButtons } from '../store/selectors'
 
@@ -31,14 +32,36 @@ const Pagination = ({ paginationButtons }) => {
     setGroupPagesNumber(currNum)
   }
 
-  return (<div>
-    <span className='arrow-gray' onClick={handleClickLeftArrow}></span>
+  return (
+    <div className='pagination'>
+      <span
+        className={(groupPagesNumber === 0
+          ? 'arrow-gray'
+          : 'arrow-gray arrow-gray--translate'
+          )}
+        onClick={handleClickLeftArrow}
+      >
+        </span>
 
-    {paginationButtons.length && paginationButtons[groupPagesNumber].map(but =>
-      <button onClick={handleChangeCurrPage}>{but}</button>
-    )}
-    <span className='arrow-blue' onClick={handleClickRightArrow}></span>
-  </div>
+      {paginationButtons.length
+        && paginationButtons[groupPagesNumber]
+          .map(but =>
+            <button
+              onClick={handleChangeCurrPage}
+              className={(but === +selectedPage
+                ? 'pagination__button pagination__button--active'
+                : 'pagination__button')}
+            >
+              {but}
+            </button>
+          )}
+      <span
+      className={(groupPagesNumber === paginationButtons.length -1
+        ? 'arrow-blue arrow-blue--translate'
+        : 'arrow-blue'
+        )}
+      onClick={handleClickRightArrow}></span>
+    </div>
   )
 }
 
