@@ -1,22 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { selectUsers } from '../store/selectors'
+import { selectUserDetailes } from '../store/selectors'
 
 import UserList from './usersList'
 import UserStatistic from './userStatistic'
 import '../styles/usersPage.scss'
 
 
-const UsersPage = ({ match, usersData }) => {
+const UsersPage = ({ match, userDetails }) => {
   const userId = match.params.id
 
-  // console.log('selectUsers', selectUsers)
-  // console.log('usersData', usersData)
+  const linkClass = userId
+    ? 'nav__link' 
+    : 'nav__link nav__link--active'
+  
+  const linkTo = `/users/${userId}`
+
   return (
     <div>
       <header className='header'>
-        <div className='header__logo'>AppCo</div>
+        <Link to='/' className='header__logo'>AppCo</Link>
       </header>
       <body className='body'>
         <div className='nav'>
@@ -29,17 +33,28 @@ const UsersPage = ({ match, usersData }) => {
           <span className='nav__arrow'></span>
           <Link
             to='/users'
-            className='nav__link nav__link--active'
+            className={linkClass}
           >
             Users statistics
           </Link>
+          {userId && 
+          <>
+            <span className='nav__arrow'></span>
+            <Link
+              to={linkTo}
+              className='nav__link nav__link--active'
+            >
+              {userDetails.length ? userDetails[0]['name'] : ''}
+            </Link>
+            </>
+          }
           
         </div>
         {userId && <UserStatistic userId={userId}/>}
         {!userId && <UserList match={match}/>}
       </body>
       <footer className='footer'>
-        <div className='footer__logo'>AppCo</div>
+        <Link to='/' className='footer__logo'>AppCo</Link>
         <div className='footer__rights'>All rights reserved by ThemeTags</div>
         <div className='footer__copyright'>Copyrights © 2019.</div>
       </footer>
@@ -48,7 +63,7 @@ const UsersPage = ({ match, usersData }) => {
 }
 
 const mapStateToProps = state => ({
-  usersData: selectUsers(state),
+  userDetails: selectUserDetailes(state),
 });
 
 export default connect(

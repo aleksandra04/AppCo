@@ -24,8 +24,6 @@ const UsersList = ({
   const searchParams = new URLSearchParams(location.search);
   const selectedPage = searchParams.get('page');
   const selectedUser = match.params.id
-
-  console.log('selectedUser', match);
   
   useEffect(() => {
     loadUsers(selectedPage ? selectedPage : 1);

@@ -65,6 +65,10 @@
   &__cell {
     color:  #1A1A1A;
 
+    &:hover {
+      cursor: pointer;
+    }
+
     @media(max-width: 1275px) {
       font-size: 12px;
     }

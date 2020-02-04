@@ -38,7 +38,7 @@ export const seleсtPaginationButtons = createSelector(
   }
 );
 
-export const userDetailes = createSelector(
+export const selectUserDetailes = createSelector(
   rootSelector,
   ({ userStatistics }) => {
    return !userStatistics ? [] : userStatistics;

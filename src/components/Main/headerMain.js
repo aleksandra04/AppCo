@@ -5,7 +5,7 @@ import '../../styles/headerMain.scss'
 const HeaderMain = () => (
   <header className='header-main'>
     <div className='header-main__left'>
-      <div className='header-main__left_logo'>AppCo</div>
+      <Link to='/' className='header-main__left_logo'>AppCo</Link>
       <div className='header-main__left_heading'>
         <span
           className='header-main__left_heading header-main__left_heading--bold'

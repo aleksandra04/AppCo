@@ -25,12 +25,15 @@ const usersWithFilter = (usersPerPage, currentPage) => {
   return usersWithStatistic.slice(start, end)
 }
 
-const userDetailes = (usedId, startDate, endDate) => {
+const userDetailes = (userId, startDate, endDate) => {
   let from = new Date(startDate)
   let to = new Date(endDate)
-  let data = users_statistic.filter(item => item.user_id === +usedId).map(item => {
+  let user = users.find(user => user.id === +userId)
+  let data = users_statistic.filter(item => item.user_id === +userId)
+    .map(item => {
     return {
       ...item,
+      name: `${user.first_name} ${user.last_name}`,
       date: new Date(item.date)
     }
   }).filter(item => from <= item.date && item.date <= to)
@@ -45,7 +48,7 @@ const userDetailes = (usedId, startDate, endDate) => {
 app.get('/api/v1/users/:id?', (request, response) => {
   response.set('Access-Control-Allow-Origin', 'http://localhost:3000');
   if (request.params.id) {
-    //check if user exists, maybe return error and catch it on the clients side
+    //TODO check if user exists, maybe return error and catch it on the clients side
     response.json(userDetailes(request.params.id, request.query.from, request.query.to))
   }
   else {

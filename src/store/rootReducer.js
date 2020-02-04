@@ -51,15 +51,12 @@ export const uploadUsers = (selectedPage) => (dispatch) => {
 
 export const uploadUserStatistic = (userId, startDate, endDate) => (dispatch) => {
 
-  dispatch(startLoading())
-
   fetch(`http://localhost:5000/api/v1/users/${userId}?from=${startDate}&to=${endDate}`)
     .then(res => res.json())
     .then((data) => {
       dispatch(saveUserStatitics(data))
     })
     .catch(error => dispatch(setUsersError(error.message)))
-    .finally(() => dispatch(stopLoading()));
 }
 
 const initialState = {

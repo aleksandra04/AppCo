@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import '../../styles/footerMain.scss'
 
 const FooterMain = () => (
@@ -11,7 +12,7 @@ const FooterMain = () => (
       <button className='footer-form__button'>Subscribe</button>
     </form>
     <div className='footer-main__info'>
-      <p className='footer-main__info_logo'>AppCo</p>
+      <Link to='/' className='footer-main__info_logo'>AppCo</Link>
       <p className='footer-main__info_rights'>
         All rights reserved by ThemeTags
       </p>
