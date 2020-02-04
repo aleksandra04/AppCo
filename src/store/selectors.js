@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { usersPerPage } from './../App';
+import { usersPerPage } from './rootReducer';
 
 const rootSelector = state => state;
 

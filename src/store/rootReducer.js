@@ -1,4 +1,4 @@
-import { usersPerPage } from './../App';
+export const usersPerPage = 50
 
 const SAVE_USERS = 'SAVE_USERS';
 const SET_LOAD_USERS_ERROR = 'SET_LOAD_USERS_ERROR';
@@ -39,7 +39,7 @@ const saveUserStatitics = value => ({
 export const uploadUsers = (selectedPage) => (dispatch) => {
   dispatch(startLoading())
 
-  fetch(`http://localhost:5000/api/v1/users?per_page=${usersPerPage}&page=${selectedPage}`)
+  fetch(`${process.env.REACT_APP_SERVER_HOST_URL}/users?per_page=${usersPerPage}&page=${selectedPage}`)
     .then(res => res.json())
     .then(({ users, countAllUsers }) => {
       dispatch(saveUsers(users))
@@ -51,7 +51,7 @@ export const uploadUsers = (selectedPage) => (dispatch) => {
 
 export const uploadUserStatistic = (userId, startDate, endDate) => (dispatch) => {
 
-  fetch(`http://localhost:5000/api/v1/users/${userId}?from=${startDate}&to=${endDate}`)
+  fetch(`${process.env.REACT_APP_SERVER_HOST_URL}/users/${userId}?from=${startDate}&to=${endDate}`)
     .then(res => res.json())
     .then((data) => {
       dispatch(saveUserStatitics(data))

@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 5000 //TO CHANGE
+const port = process.env.PORT || 5000
 const users = require('./public/users')
 const users_statistic = require('./public/users_statistic')
 
@@ -10,7 +10,6 @@ const usersWithStatistic = users.map(user => {
 
   return {
     ...user,
-    // staistic: stat,
     totalClicks: stat.map((a) => a.clicks)
       .reduce((a, b) => a + b),
     totalPageViews: stat.map((a) => a.page_views)
