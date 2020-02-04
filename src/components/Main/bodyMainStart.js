@@ -5,7 +5,6 @@ import macbook from '../../images/macbook.png'
 
 const BodyMainStart = () => (
   <section className='start'>
-    {/* <div className='start__container'> */}
       <div className='start__descr'>
         <h3 className='start__descr_header'>
           Start Managing your apps business, more faster
@@ -23,11 +22,10 @@ const BodyMainStart = () => (
         <img
           src={macbook}
           className='start_img_card'
+          alt='laptop'
           >
           </img>
-          {/* <div className='start__container_img_card'></div> */}
       </div>
-    {/* </div> */}
   </section>
 )
 

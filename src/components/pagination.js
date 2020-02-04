@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types'
 import { useHistory, useLocation } from 'react-router-dom'
 import '../styles/pagination.scss'
-import cx from 'classnames';
 import { connect } from 'react-redux';
 import { seleсtPaginationButtons } from '../store/selectors'
 
@@ -12,7 +12,8 @@ const Pagination = ({ paginationButtons }) => {
   const searchParams = new URLSearchParams(location.search);
   const selectedPage = searchParams.get('page');
 
-  const [groupPagesNumber, setGroupPagesNumber] = useState(selectedPage ? Math.ceil(selectedPage / 5) - 1 : 0);
+  const [groupPagesNumber, setGroupPagesNumber] = 
+    useState(selectedPage ? Math.ceil(selectedPage / 5) - 1 : 0);
 
   const handleChangeCurrPage = (event) => {
     searchParams.set('page', event.target.innerText);
@@ -72,3 +73,11 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps
 )(Pagination);
+
+Pagination.propTypes = {
+  paginationButtons: PropTypes.arrayOf(PropTypes.shape([])),
+};
+
+Pagination.defaultProps = {
+  paginationButtons: [],
+};

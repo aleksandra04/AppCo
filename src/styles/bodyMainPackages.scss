@@ -1,7 +1,6 @@
 @import "../store/styles/variables.scss";
 
 .packages {
-  // height: 860px;
   background: url('../images/packages_bg.png') 100% 0 no-repeat;
   background-size: contain;
   display: flex;
@@ -11,7 +10,6 @@
 
 
   &__header {
-    // max-width: 580px;
     font-size: 32px;
     text-align: center;
     line-height: 39px;

@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
-
 import { usersPerPage } from './rootReducer';
+
+const countOfPagesPagination = 5;
 
 const rootSelector = state => state;
 
@@ -26,12 +27,12 @@ export const seleсtPaginationButtons = createSelector(
   ({ countAllUsers }) => {
     let count = Math.ceil(countAllUsers / usersPerPage)
 
-    let arr = [...Array(count+1).keys()]
+    let arr = [...Array(count + 1).keys()]
     arr.shift()
 
     let result = []
       while(arr.length>0) {
-        result.push(arr.splice(0, 5))
+        result.push(arr.splice(0, countOfPagesPagination))
       }
 
     return result

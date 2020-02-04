@@ -22,9 +22,9 @@ const BodyMainPackages = () => (
 
       <div className='card'>
         <p className='card__header'>Basic</p>
-        <img src={basic} className='card__img'></img>
+        <img src={basic} className='card__img' alt='basic'></img>
         <h2 className='card__price'>$29</h2>
-        <img src={line}></img>
+        <img src={line} alt='line'></img>
         <div className='card__text'>
           Push Notifications<br />
           Data Transfer<br />
@@ -41,9 +41,9 @@ const BodyMainPackages = () => (
 
       <div className='card card--shadow'>
         <p className='card__header'>Standard</p>
-        <img src={standart}></img>
+        <img src={standart} alt='standart'></img>
         <h2 className='card__price card__price--blue'>$149</h2>
-        <img src={line}></img>
+        <img src={line} alt='line'></img>
         <div className='card__text'>
           Push Notifications<br />
           Data Transfer<br />
@@ -60,9 +60,9 @@ const BodyMainPackages = () => (
 
       <div className='card'>
         <p className='card__header'>Unlimited</p>
-        <img src={unlimited}></img>
+        <img src={unlimited} alt='unlimited'></img>
         <h2 className='card__price'>$39</h2>
-        <img src={line}></img>
+        <img src={line} alt='line'></img>
         <div className='card__text'>
           Push Notifications<br />
           Data Transfer<br />
@@ -78,7 +78,9 @@ const BodyMainPackages = () => (
       </div>
     </div>
     <div className='contact'>
-      <p className='contact__text'>If you need custom services or Need more?</p>
+      <p className='contact__text'>
+        If you need custom services or Need more?
+      </p>
       <Link
         to='/'
         className='contact__link'

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import '../styles/userStatistic.scss'
 
@@ -17,7 +18,7 @@ const UserStatistic = ({
 
   useEffect(() => {
     uploadStatistic(userId, dateFrom, dateTo);
-  }, [userId, dateFrom, dateTo]);
+  }, [userId, dateFrom, dateTo, uploadStatistic]);
 
   const changeDateFromHandler = (event) => {
     setDateFrom(event.target.value)
@@ -29,7 +30,9 @@ const UserStatistic = ({
 
   return (
     <>
-      <h1 className='user-name'>{userDetailes.length && userDetailes[0].name}</h1>
+      <h1 className='user-name'>
+        {userDetailes.length && userDetailes[0].name}
+      </h1>
       <label className='label'>
         From
         <input
@@ -66,14 +69,24 @@ const UserStatistic = ({
 
 const mapStateToProps = state => ({
   userDetailes: selectUserDetailes(state),
-
 });
 
 const mapDispatchToProps = dispatch => ({
-  uploadStatistic: (userId, startDate, endDate) => dispatch(uploadUserStatistic(userId, startDate, endDate)),
+  uploadStatistic: (userId, startDate, endDate) => 
+    dispatch(uploadUserStatistic(userId, startDate, endDate)),
 });
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(UserStatistic);
+
+UserStatistic.propTypes = {
+  userDetailes: PropTypes.arrayOf(PropTypes.shape({})),
+  uploadStatistic: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
+};
+
+UserStatistic.defaultProps = {
+  userDetailes: [],
+};

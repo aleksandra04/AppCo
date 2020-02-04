@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { selectUserDetailes } from '../store/selectors'
@@ -70,3 +71,11 @@ export default connect(
   mapStateToProps,
   null
 )(UsersPage);
+
+UsersPage.propTypes = {
+  userDetailes: PropTypes.arrayOf(PropTypes.shape({})),
+};
+
+UsersPage.defaultProps = {
+  userDetailes: [],
+};

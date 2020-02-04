@@ -19,7 +19,9 @@ const HeaderMain = () => (
         business greatly. Learn more about our work!
           </p>
       <div>
-        <Link to='/users' className='header-main__left_button'>View Stats</Link>
+        <Link to='/users' className='header-main__left_button'>
+          View Stats
+        </Link>
       </div>
     </div>
     <div className='header-main__phone'>

@@ -1,4 +1,4 @@
-export const usersPerPage = 50
+export const usersPerPage = 20
 
 const SAVE_USERS = 'SAVE_USERS';
 const SET_LOAD_USERS_ERROR = 'SET_LOAD_USERS_ERROR';

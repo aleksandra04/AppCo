@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip
 } from 'recharts';
@@ -7,7 +8,6 @@ const Chart = ({
   data,
   dataKey,
 }) => {
-
 
   return (
     <div>
@@ -22,8 +22,6 @@ const Chart = ({
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis
           dataKey="date"
-          tickSize={1}
-        // tickFormatter={timeStr => new Intl.DateTimeFormat('en-US', { date: 'short'}).format(new Date(timeStr))}
         />
         <YAxis />
         <Tooltip 
@@ -37,3 +35,12 @@ const Chart = ({
 }
 
 export default Chart
+
+Chart.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.shape({})),
+  dataKey: PropTypes.string.isRequired,
+};
+
+Chart.defaultProps = {
+  data: [],
+};
